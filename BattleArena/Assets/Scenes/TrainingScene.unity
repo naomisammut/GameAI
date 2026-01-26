@@ -132,7 +132,6 @@ GameObject:
   - component: {fileID: 862963762}
   - component: {fileID: 862963761}
   - component: {fileID: 862963760}
-  - component: {fileID: 862963759}
   - component: {fileID: 862963758}
   - component: {fileID: 862963757}
   - component: {fileID: 862963756}
@@ -186,7 +185,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  arenaCenter: {fileID: 0}
+  arenaCenter: {fileID: 1067830552}
   arenaHalfExtents: {x: 8, y: 1, z: 8}
   moveSpeed: 4
   turnSpeed: 180
@@ -211,25 +210,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 5
+  DecisionPeriod: 1
   DecisionStep: 0
   TakeActionsBetweenDecisions: 1
---- !u!114 &862963759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 862963755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b6042bc9a5d4aa58d931eae49442e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
 --- !u!114 &862963760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 1
+    VectorObservationSize: 7
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 3
@@ -256,7 +239,7 @@ MonoBehaviour:
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Gladiator
-  TeamId: 0
+  TeamId: 1
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_DeterministicInference: 0
@@ -782,7 +765,6 @@ GameObject:
   - component: {fileID: 1794192006}
   - component: {fileID: 1794192005}
   - component: {fileID: 1794192004}
-  - component: {fileID: 1794192003}
   - component: {fileID: 1794192002}
   - component: {fileID: 1794192001}
   - component: {fileID: 1794192000}
@@ -836,7 +818,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  arenaCenter: {fileID: 0}
+  arenaCenter: {fileID: 1067830552}
   arenaHalfExtents: {x: 8, y: 1, z: 8}
   moveSpeed: 4
   turnSpeed: 180
@@ -861,25 +843,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 5
+  DecisionPeriod: 1
   DecisionStep: 0
   TakeActionsBetweenDecisions: 1
---- !u!114 &1794192003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794191999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b6042bc9a5d4aa58d931eae49442e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
 --- !u!114 &1794192004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -893,7 +859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 1
+    VectorObservationSize: 7
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 3
@@ -906,7 +872,7 @@ MonoBehaviour:
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Gladiator
-  TeamId: 0
+  TeamId: 1
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_DeterministicInference: 0
@@ -1015,7 +981,6 @@ GameObject:
   - component: {fileID: 1854988030}
   - component: {fileID: 1854988029}
   - component: {fileID: 1854988028}
-  - component: {fileID: 1854988027}
   - component: {fileID: 1854988026}
   - component: {fileID: 1854988025}
   - component: {fileID: 1854988024}
@@ -1069,7 +1034,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  arenaCenter: {fileID: 0}
+  arenaCenter: {fileID: 1067830552}
   arenaHalfExtents: {x: 8, y: 1, z: 8}
   moveSpeed: 4
   turnSpeed: 180
@@ -1094,25 +1059,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 5
+  DecisionPeriod: 1
   DecisionStep: 0
   TakeActionsBetweenDecisions: 1
---- !u!114 &1854988027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854988023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b6042bc9a5d4aa58d931eae49442e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
 --- !u!114 &1854988028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1126,7 +1075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 1
+    VectorObservationSize: 7
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 3
@@ -1248,7 +1197,6 @@ GameObject:
   - component: {fileID: 2144103246}
   - component: {fileID: 2144103245}
   - component: {fileID: 2144103244}
-  - component: {fileID: 2144103243}
   - component: {fileID: 2144103242}
   - component: {fileID: 2144103241}
   - component: {fileID: 2144103240}
@@ -1302,7 +1250,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  arenaCenter: {fileID: 0}
+  arenaCenter: {fileID: 1067830552}
   arenaHalfExtents: {x: 8, y: 1, z: 8}
   moveSpeed: 4
   turnSpeed: 180
@@ -1327,25 +1275,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 5
+  DecisionPeriod: 1
   DecisionStep: 0
   TakeActionsBetweenDecisions: 1
---- !u!114 &2144103243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2144103239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b6042bc9a5d4aa58d931eae49442e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
 --- !u!114 &2144103244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1359,7 +1291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 1
+    VectorObservationSize: 7
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 3

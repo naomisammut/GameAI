@@ -59,7 +59,7 @@ public class GladiatorAgent : Agent
         Vector3 c = arenaCenter ? arenaCenter.position : Vector3.zero;
         float x = Random.Range(-arenaHalfExtents.x, arenaHalfExtents.x);
         float z = Random.Range(-arenaHalfExtents.z, arenaHalfExtents.z);
-        transform.position = c + new Vector3(x, 0.5f, z);
+        transform.position = c + new Vector3(x, 1.1f, z);
 
         transform.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
 
