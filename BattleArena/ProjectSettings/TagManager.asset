@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HealthPack
   - AmmoCrate
+  - Cover
   layers:
   - Default
   - TransparentFX
