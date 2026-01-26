@@ -186,7 +186,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   arenaCenter: {fileID: 1067830552}
-  arenaHalfExtents: {x: 8, y: 1, z: 8}
+  arenaHalfExtents: {x: 24, y: 1, z: 24}
   moveSpeed: 4
   turnSpeed: 180
   maxHealth: 100
@@ -819,7 +819,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   arenaCenter: {fileID: 1067830552}
-  arenaHalfExtents: {x: 8, y: 1, z: 8}
+  arenaHalfExtents: {x: 24, y: 1, z: 24}
   moveSpeed: 4
   turnSpeed: 180
   maxHealth: 100
@@ -1035,7 +1035,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   arenaCenter: {fileID: 1067830552}
-  arenaHalfExtents: {x: 8, y: 1, z: 8}
+  arenaHalfExtents: {x: 24, y: 1, z: 24}
   moveSpeed: 4
   turnSpeed: 180
   maxHealth: 100
@@ -1251,7 +1251,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   arenaCenter: {fileID: 1067830552}
-  arenaHalfExtents: {x: 8, y: 1, z: 8}
+  arenaHalfExtents: {x: 24, y: 1, z: 24}
   moveSpeed: 4
   turnSpeed: 180
   maxHealth: 100
