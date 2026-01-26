@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1769465220",
+        "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\nnatt\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\mlagents-learn config\\GladiatorSelfPlay.yaml --run-id=GladiatorRun1",
+        "mlagents_version": "1.1.0",
+        "mlagents_envs_version": "1.1.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.10.0+cpu",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1769465284"
+    },
+    "total": 63.8588310999985,
+    "count": 1,
+    "self": 0.011863999992783647,
+    "children": {
+        "run_training.setup": {
+            "total": 0.18871500000386732,
+            "count": 1,
+            "self": 0.18871500000386732
+        },
+        "TrainerController.start_learning": {
+            "total": 63.658252100001846,
+            "count": 1,
+            "self": 0.0002367999986745417,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 63.6579899999997,
+                    "count": 1,
+                    "self": 63.6579899999997
+                },
+                "TrainerController._save_models": {
+                    "total": 2.5300003471784294e-05,
+                    "count": 1,
+                    "self": 2.5300003471784294e-05
+                }
+            }
+        }
+    }
+}
