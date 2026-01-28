@@ -9,11 +9,11 @@ using Unity.MLAgents.Policies;
 public class GladiatorAgentV2 : Agent
 {
     [Header("Optional manual links (scene instances)")]
-    [SerializeField] private Transform spawnPoint; // optional (auto: Spawn_A / Spawn_B)
-    [SerializeField] private Transform enemy;      // optional (auto-find other agent)
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Transform enemy;
 
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 100f;
+    [SerializeField] private float moveSpeed = 25f;
     [SerializeField] private float turnSpeed = 220f;
 
     [Header("Episode")]
@@ -46,9 +46,8 @@ public class GladiatorAgentV2 : Agent
     private void AutoAssignSpawn()
     {
         if (spawnPoint != null || bp == null) return;
-
         string spawnName = (bp.TeamId == 0) ? "Spawn_A" : "Spawn_B";
-        GameObject sp = GameObject.Find(spawnName);
+        var sp = GameObject.Find(spawnName);
         if (sp != null) spawnPoint = sp.transform;
     }
 
@@ -56,7 +55,7 @@ public class GladiatorAgentV2 : Agent
     {
         if (enemy != null) return;
 
-        GladiatorAgentV2[] all = FindObjectsOfType<GladiatorAgentV2>();
+        var all = FindObjectsOfType<GladiatorAgentV2>();
         foreach (var a in all)
         {
             if (a != this)
@@ -73,18 +72,15 @@ public class GladiatorAgentV2 : Agent
         AutoAssignSpawn();
         AutoFindEnemy();
 
-        // Reset pose
         if (spawnPoint != null)
             transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
 
-        // Reset physics (Unity 6)
         if (rb != null)
         {
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
 
-        // Reset health + weapon
         if (myHealth != null) myHealth.ResetHP();
         if (weapon != null) weapon.ResetWeapon();
 
@@ -96,10 +92,8 @@ public class GladiatorAgentV2 : Agent
         CacheComponents();
         AutoFindEnemy();
 
-        // Hard safety
         if (sensor == null || rb == null)
         {
-            // Output something consistent-ish and return (prevents spam crashes)
             sensor?.AddObservation(0f); sensor?.AddObservation(0f);
             sensor?.AddObservation(0f); sensor?.AddObservation(0f);
             sensor?.AddObservation(0f); sensor?.AddObservation(0f); sensor?.AddObservation(0f);
@@ -107,17 +101,14 @@ public class GladiatorAgentV2 : Agent
             return;
         }
 
-        // Self forward (2)
         Vector3 f = transform.forward;
         sensor.AddObservation(f.x);
         sensor.AddObservation(f.z);
 
-        // Self velocity LOCAL (2)
         Vector3 vLocal = transform.InverseTransformDirection(rb.linearVelocity);
         sensor.AddObservation(vLocal.x);
         sensor.AddObservation(vLocal.z);
 
-        // Enemy direction LOCAL + distance (3)
         if (enemy != null)
         {
             Vector3 toEnemy = enemy.position - transform.position;
@@ -133,7 +124,6 @@ public class GladiatorAgentV2 : Agent
             sensor.AddObservation(0f);
         }
 
-        // Health (1)
         sensor.AddObservation(myHealth != null ? myHealth.HPNormalized : 1f);
     }
 
@@ -143,49 +133,37 @@ public class GladiatorAgentV2 : Agent
         AutoFindEnemy();
         if (rb == null) return;
 
-        // Continuous: move, turn
         float move = Mathf.Clamp(actions.ContinuousActions[0], -1f, 1f);
         float turn = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f);
 
         rb.AddForce(transform.forward * (move * moveSpeed), ForceMode.Acceleration);
         transform.Rotate(Vector3.up, turn * turnSpeed * Time.fixedDeltaTime);
 
-        // Discrete: attack (0/1)
+        // Attack (Discrete 0/1)
         if (actions.DiscreteActions.Length > 0 && weapon != null)
             weapon.TryAttack(actions.DiscreteActions[0] == 1);
 
-        // --- Reward shaping ---
+        // Reward shaping to stop spinning-only
+        AddReward(-0.0002f);                    // time penalty
+        AddReward(0.00015f * Mathf.Abs(move));  // encourage moving input
+        AddReward(-0.00025f * Mathf.Abs(turn)); // discourage constant spinning
+        AddReward(-0.00015f * Mathf.Abs(rb.angularVelocity.y));
 
-        // Time penalty
-        AddReward(-0.0002f);
-
-        // Encourage some movement input
-        AddReward(0.00015f * Mathf.Abs(move));
-
-        // Penalize excessive turning (breaks infinite spin)
-        AddReward(-0.00025f * Mathf.Abs(turn));
-        if (rb != null) AddReward(-0.00015f * Mathf.Abs(rb.angularVelocity.y));
-
-        // Reward moving toward enemy
-        if (enemy != null && rb != null)
+        if (enemy != null)
         {
             Vector3 toEnemy = enemy.position - transform.position;
             float d = toEnemy.magnitude;
             Vector3 dir = (d > 0.001f) ? toEnemy / d : transform.forward;
 
-            // progress
-            AddReward(0.004f * (prevDist - d));
+            AddReward(0.004f * (prevDist - d)); // reward getting closer
             prevDist = d;
 
-            // velocity toward enemy
             float towardSpeed = Vector3.Dot(rb.linearVelocity, dir);
             AddReward(0.0015f * towardSpeed);
 
-            // facing enemy
             AddReward(0.0007f * Vector3.Dot(transform.forward, dir));
         }
 
-        // Fall off arena => lose
         if (transform.position.y < -2f)
         {
             AddReward(-1f);
@@ -193,21 +171,24 @@ public class GladiatorAgentV2 : Agent
         }
     }
 
-    // Called by Health when taking damage
-    public void OnGotHit() => AddReward(-0.1f);
+    // Manual test: WASD move, Space attack
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        var c = actionsOut.ContinuousActions;
+        c[0] = Input.GetKey(KeyCode.W) ? 1f : Input.GetKey(KeyCode.S) ? -1f : 0f;
+        c[1] = Input.GetKey(KeyCode.D) ? 1f : Input.GetKey(KeyCode.A) ? -1f : 0f;
 
-    // Called by Health when we successfully hit enemy
+        if (actionsOut.DiscreteActions.Length > 0)
+        {
+            var d = actionsOut.DiscreteActions;
+            d[0] = Input.GetKey(KeyCode.Space) ? 1 : 0;
+        }
+    }
+
+    // Rewards from combat
+    public void OnGotHit() => AddReward(-0.1f);
     public void OnHitEnemy() => AddReward(+0.1f);
 
-    public void Win()
-    {
-        AddReward(+1f);
-        EndEpisode();
-    }
-
-    public void Lose()
-    {
-        AddReward(-1f);
-        EndEpisode();
-    }
+    public void Win() { AddReward(+1f); EndEpisode(); }
+    public void Lose() { AddReward(-1f); EndEpisode(); }
 }

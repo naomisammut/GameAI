@@ -1,4 +1,7 @@
 {
+    "Gladiator": {
+        "elo": 1198.0086179957034
+    },
     "metadata": {
         "stats_format_version": "0.3.0",
         "mlagents_version": "1.1.0",

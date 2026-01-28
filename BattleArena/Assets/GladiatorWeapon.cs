@@ -2,9 +2,15 @@ using UnityEngine;
 
 public class GladiatorWeapon : MonoBehaviour
 {
-    [SerializeField] private Collider hitTrigger; // should be trigger collider on this object
-    [SerializeField] private float activeTime = 0.15f;
+    [SerializeField] private Collider hitTrigger;   // Sphere/Box collider on Weapon
+    [SerializeField] private bool debugLogs = true;
+
+    [Header("Timing")]
+    [SerializeField] private float activeTime = 0.25f;
     [SerializeField] private float cooldown = 0.35f;
+
+    [Header("Backup hit check (works even if already overlapping)")]
+    [SerializeField] private float overlapRadius = 0.45f;
 
     private float activeLeft;
     private float cooldownLeft;
@@ -13,6 +19,8 @@ public class GladiatorWeapon : MonoBehaviour
     private GladiatorAgentV2 ownerAgent;
     private GladiatorHealth ownerHealth;
 
+    private bool SwingActive => activeLeft > 0f;
+
     private void Awake()
     {
         if (hitTrigger == null) hitTrigger = GetComponent<Collider>();
@@ -20,10 +28,14 @@ public class GladiatorWeapon : MonoBehaviour
         ownerAgent = GetComponentInParent<GladiatorAgentV2>();
         ownerHealth = GetComponentInParent<GladiatorHealth>();
 
-        // collider must be trigger
-        if (hitTrigger != null) hitTrigger.isTrigger = true;
+        // Keep collider always enabled, only apply damage while SwingActive
+        if (hitTrigger != null)
+        {
+            hitTrigger.enabled = true;
+            hitTrigger.isTrigger = true;
+        }
 
-        SetHitActive(false);
+        ResetWeapon();
     }
 
     public void ResetWeapon()
@@ -31,7 +43,6 @@ public class GladiatorWeapon : MonoBehaviour
         activeLeft = 0f;
         cooldownLeft = 0f;
         hitThisSwing = false;
-        SetHitActive(false);
     }
 
     private void Update()
@@ -41,7 +52,7 @@ public class GladiatorWeapon : MonoBehaviour
         if (activeLeft > 0f)
         {
             activeLeft -= Time.deltaTime;
-            if (activeLeft <= 0f) SetHitActive(false);
+            if (activeLeft < 0f) activeLeft = 0f;
         }
     }
 
@@ -54,27 +65,46 @@ public class GladiatorWeapon : MonoBehaviour
         activeLeft = activeTime;
         cooldownLeft = cooldown;
 
-        SetHitActive(true);
-    }
+        if (debugLogs) Debug.Log($"{ownerAgent?.name} ATTACK");
 
-    private void SetHitActive(bool on)
-    {
-        if (hitTrigger != null) hitTrigger.enabled = on;
+        // Immediate check in case we're already overlapping
+        TryHitFromOverlaps();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (hitThisSwing) return;
-        if (hitTrigger == null || !hitTrigger.enabled) return;
+        if (!SwingActive || hitThisSwing) return;
+        TryHit(other);
+    }
 
-        // Hit any OTHER GladiatorHealth (not ourselves)
+    private void OnTriggerStay(Collider other)
+    {
+        if (!SwingActive || hitThisSwing) return;
+        TryHit(other);
+    }
+
+    private void TryHit(Collider other)
+    {
         GladiatorHealth otherHealth = other.GetComponentInParent<GladiatorHealth>();
         if (otherHealth == null) return;
         if (otherHealth == ownerHealth) return;
 
         hitThisSwing = true;
 
-        // Apply damage + rewards via TakeHit(attacker)
+        if (debugLogs) Debug.Log($"{ownerAgent?.name} HIT {otherHealth.name}");
+
         otherHealth.TakeHit(ownerAgent);
+    }
+
+    private void TryHitFromOverlaps()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, overlapRadius);
+        for (int i = 0; i < hits.Length && !hitThisSwing; i++)
+            TryHit(hits[i]);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, overlapRadius);
     }
 }

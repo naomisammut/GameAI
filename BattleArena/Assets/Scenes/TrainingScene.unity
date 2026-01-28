@@ -163,6 +163,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6020197379230823255, guid: dcdca0e28fa8ca34e84e48ca02a6419f, type: 3}
+      propertyPath: m_BehaviorType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6020197379230823255, guid: dcdca0e28fa8ca34e84e48ca02a6419f, type: 3}
       propertyPath: m_BrainParameters.VectorActionSize.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -237,6 +241,10 @@ PrefabInstance:
     - target: {fileID: 4445478442000279234, guid: dcdca0e28fa8ca34e84e48ca02a6419f, type: 3}
       propertyPath: m_Name
       value: Gladiator_B
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199736148971952505, guid: dcdca0e28fa8ca34e84e48ca02a6419f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8005958977122030210, guid: dcdca0e28fa8ca34e84e48ca02a6419f, type: 3}
       propertyPath: enemy
@@ -456,6 +464,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6020197379230823255, guid: dcdca0e28fa8ca34e84e48ca02a6419f, type: 3}
+      propertyPath: m_BehaviorType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6020197379230823255, guid: dcdca0e28fa8ca34e84e48ca02a6419f, type: 3}
       propertyPath: m_BrainParameters.VectorActionSize.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -530,6 +542,10 @@ PrefabInstance:
     - target: {fileID: 4445478442000279234, guid: dcdca0e28fa8ca34e84e48ca02a6419f, type: 3}
       propertyPath: m_Name
       value: Gladiator_A
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199736148971952505, guid: dcdca0e28fa8ca34e84e48ca02a6419f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8005958977122030210, guid: dcdca0e28fa8ca34e84e48ca02a6419f, type: 3}
       propertyPath: enemy
