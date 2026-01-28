@@ -13,7 +13,7 @@ public class GladiatorAgentV2 : Agent
     [SerializeField] private Transform enemy;      // optional (auto-find other agent)
 
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 25f;
+    [SerializeField] private float moveSpeed = 100f;
     [SerializeField] private float turnSpeed = 220f;
 
     [Header("Episode")]

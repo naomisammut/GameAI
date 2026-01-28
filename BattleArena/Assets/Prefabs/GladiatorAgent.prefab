@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 4445478442000279234}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: 1, z: 0}
+  m_LocalPosition: {x: 10, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -223,9 +223,7 @@ MonoBehaviour:
   enemy: {fileID: 0}
   moveSpeed: 2.5
   turnSpeed: 40
-  weapon: {fileID: 0}
-  myHealth: {fileID: 0}
-  enemyHealth: {fileID: 0}
+  maxEpisodeSteps: 2000
 --- !u!114 &9186425864639036092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,8 +252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 5
-  agent: {fileID: 0}
-  enemyAgent: {fileID: 0}
 --- !u!1 &4679979158301695705
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,7 +319,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitTrigger: {fileID: 0}
-  ownerAgent: {fileID: 0}
-  enemyHealth: {fileID: 0}
-  attackActiveTime: 0.15
-  attackCooldown: 0.4
+  activeTime: 0.15
+  cooldown: 0.35
