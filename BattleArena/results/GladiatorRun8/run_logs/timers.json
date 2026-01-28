@@ -2,39 +2,39 @@
     "name": "root",
     "metadata": {
         "timer_format_version": "0.1.0",
-        "start_time_seconds": "1769530460",
+        "start_time_seconds": "1769529368",
         "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
-        "command_line_arguments": "C:\\Users\\nnatt\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\mlagents\\trainers\\learn.py config\\GladiatorSelfPlay.yaml --run-id=GladiatorRun1 --force",
+        "command_line_arguments": "C:\\Users\\nnatt\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\mlagents-learn config\\GladiatorSelfPlay.yaml --run-id=GladiatorRun8 --force --no-graphics",
         "mlagents_version": "1.1.0",
         "mlagents_envs_version": "1.1.0",
         "communication_protocol_version": "1.5.0",
         "pytorch_version": "2.10.0+cpu",
         "numpy_version": "1.23.5",
-        "end_time_seconds": "1769530531"
+        "end_time_seconds": "1769529458"
     },
-    "total": 71.62732279999182,
+    "total": 89.61735490000865,
     "count": 1,
-    "self": 0.02126029999635648,
+    "self": 0.044189800013555214,
     "children": {
         "run_training.setup": {
-            "total": 0.13924150000093505,
+            "total": 0.13859869999578223,
             "count": 1,
-            "self": 0.13924150000093505
+            "self": 0.13859869999578223
         },
         "TrainerController.start_learning": {
-            "total": 71.46682099999452,
+            "total": 89.43456639999931,
             "count": 1,
-            "self": 0.00017239998851437122,
+            "self": 0.00020009999570902437,
             "children": {
                 "TrainerController._reset_env": {
-                    "total": 71.46661070000846,
+                    "total": 89.43433820000791,
                     "count": 1,
-                    "self": 71.46661070000846
+                    "self": 89.43433820000791
                 },
                 "TrainerController._save_models": {
-                    "total": 3.789999755099416e-05,
+                    "total": 2.8099995688535273e-05,
                     "count": 1,
-                    "self": 3.789999755099416e-05
+                    "self": 2.8099995688535273e-05
                 }
             }
         }
