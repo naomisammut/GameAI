@@ -166,7 +166,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 2e094db37a829154caf1353894807ffc, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: Gladiator
@@ -252,6 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 5
+  debugLogs: 1
 --- !u!1 &4679979158301695705
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,5 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitTrigger: {fileID: 0}
+  debugLogs: 1
   activeTime: 0.15
   cooldown: 0.35
+  overlapRadius: 0.45
