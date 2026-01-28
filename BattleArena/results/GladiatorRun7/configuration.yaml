@@ -40,7 +40,7 @@ behaviors:
     even_checkpoints: false
     max_steps: 5000000
     time_horizon: 128
-    summary_freq: 20000
+    summary_freq: 1000
     threaded: false
     self_play:
       save_steps: 50000
@@ -72,7 +72,7 @@ engine_settings:
   no_graphics_monitor: false
 environment_parameters: null
 checkpoint_settings:
-  run_id: GladiatorRun1
+  run_id: GladiatorRun7
   initialize_from: null
   load_model: false
   resume: false

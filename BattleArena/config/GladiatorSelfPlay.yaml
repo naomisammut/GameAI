@@ -1,30 +1,26 @@
 behaviors:
   Gladiator:
     trainer_type: ppo
-
     hyperparameters:
       batch_size: 1024
       buffer_size: 10240
       learning_rate: 3.0e-4
-
     network_settings:
       normalize: true
       hidden_units: 128
       num_layers: 2
-
-    # (recommended to include so training doesn't stop too early)
-    max_steps: 5000000
-    time_horizon: 128
-    summary_freq: 20000
-
     reward_signals:
       extrinsic:
         gamma: 0.99
         strength: 1.0
 
+    max_steps: 5000000
+    time_horizon: 128
+    summary_freq: 1000
+
     self_play:
-      window: 10
-      play_against_latest_model_ratio: 0.5
       save_steps: 50000
-      team_change: 250000
       swap_steps: 10000
+      play_against_latest_model_ratio: 0.5
+      window: 10
+      team_change: 250000
