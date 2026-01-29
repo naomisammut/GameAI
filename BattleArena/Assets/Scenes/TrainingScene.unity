@@ -163,6 +163,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6020197379230823255, guid: dcdca0e28fa8ca34e84e48ca02a6419f, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 2e094db37a829154caf1353894807ffc, type: 3}
+    - target: {fileID: -6020197379230823255, guid: dcdca0e28fa8ca34e84e48ca02a6419f, type: 3}
       propertyPath: m_BehaviorType
       value: 2
       objectReference: {fileID: 0}
@@ -463,6 +467,10 @@ PrefabInstance:
       propertyPath: TeamId
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6020197379230823255, guid: dcdca0e28fa8ca34e84e48ca02a6419f, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 2e094db37a829154caf1353894807ffc, type: 3}
     - target: {fileID: -6020197379230823255, guid: dcdca0e28fa8ca34e84e48ca02a6419f, type: 3}
       propertyPath: m_BehaviorType
       value: 2

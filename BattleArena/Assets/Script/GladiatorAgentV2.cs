@@ -171,7 +171,7 @@ public class GladiatorAgentV2 : Agent
         }
     }
 
-    // Manual test: WASD move, Space attack
+    // Manual testing
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         var c = actionsOut.ContinuousActions;

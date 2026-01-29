@@ -3,14 +3,12 @@ using UnityEngine.AI;
 
 public class StrategistAI : MonoBehaviour
 {
-    // ---------------- Stats ----------------
     [Header("Stats")]
     public float maxHealth = 100f;
     public float health = 100f;
     public int maxAmmo = 30;
     public int ammo = 10;
 
-    // ---------------- Decision ----------------
     [Header("Decision")]
     public float decisionInterval = 0.5f;
 
@@ -29,7 +27,6 @@ public class StrategistAI : MonoBehaviour
     [Header("Threat")]
     public Transform threat;
 
-    // ---------------- Internals ----------------
     enum ActionType { Heal, Ammo, Hide, Flee }
     ActionType currentAction = ActionType.Hide;
 
@@ -97,7 +94,6 @@ public class StrategistAI : MonoBehaviour
         SetNewAction(best, lockAction: true);
     }
 
-    // ---------------- Scoring ----------------
     float ScoreFor(ActionType a)
     {
         return a switch
@@ -115,12 +111,12 @@ public class StrategistAI : MonoBehaviour
         Transform hp = FindNearestWithTag("HealthPack");
         if (!hp) return 0f;
 
-        float hpNeed = 1f - (health / maxHealth);     // 0..1
+        float hpNeed = 1f - (health / maxHealth);
         float dist = Vector3.Distance(transform.position, hp.position);
         float distFactor = Mathf.Clamp01(1f - (dist / 20f));
 
         // If threat is close, healing out in the open is worse
-        float danger = Danger01(10f);                  // 0..1
+        float danger = Danger01(10f);
         float dangerPenalty = Mathf.Lerp(1f, 0.6f, danger);
 
         return (hpNeed * 0.8f + distFactor * 0.2f) * dangerPenalty;
@@ -131,12 +127,11 @@ public class StrategistAI : MonoBehaviour
         Transform am = FindNearestWithTag("AmmoCrate");
         if (!am) return 0f;
 
-        float ammoNeed = 1f - (float)ammo / maxAmmo;   // 0..1
+        float ammoNeed = 1f - (float)ammo / maxAmmo;
         float dist = Vector3.Distance(transform.position, am.position);
         float distFactor = Mathf.Clamp01(1f - (dist / 20f));
 
-        // Big penalty when threat is close (prevents “ammo vs hide” ping-pong)
-        float danger = Danger01(10f);                  // 0..1
+        float danger = Danger01(10f);
         float dangerPenalty = Mathf.Lerp(1f, 0.2f, danger);
 
         return (ammoNeed * 0.7f + distFactor * 0.3f) * dangerPenalty;
@@ -144,7 +139,6 @@ public class StrategistAI : MonoBehaviour
 
     float ScoreHide()
     {
-        // Higher when threat is close. If no threat, still allow some hide value.
         float danger = Danger01(15f);
         return Mathf.Max(0.25f, danger);
     }
@@ -153,14 +147,12 @@ public class StrategistAI : MonoBehaviour
     {
         if (!threat) return 0f;
         float d = Vector3.Distance(transform.position, threat.position);
-        return Mathf.Clamp01(1f - (d / maxDist)); // close => 1
+        return Mathf.Clamp01(1f - (d / maxDist));
     }
 
-    // ---------------- Actions ----------------
     void ContinueCurrentAction()
     {
         // Keep moving toward whatever we were doing without re-setting destinations constantly
-        // (No-op by design; NavMeshAgent continues its current path.)
     }
 
     void SetNewAction(ActionType a, bool lockAction)
@@ -203,7 +195,6 @@ public class StrategistAI : MonoBehaviour
 
     void SetDestinationSafe(Vector3 dest)
     {
-        // avoid tiny destination changes causing jitter
         if (!hasDest || Vector3.Distance(lastDest, dest) > 0.5f)
         {
             agent.SetDestination(dest);
@@ -212,7 +203,6 @@ public class StrategistAI : MonoBehaviour
         }
     }
 
-    // ---------------- Helpers ----------------
     Transform FindNearestWithTag(string tag)
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag(tag);
@@ -233,7 +223,6 @@ public class StrategistAI : MonoBehaviour
         return best;
     }
 
-    // Optional for pickups to call
     public void AddHealth(float amount) => health = Mathf.Clamp(health + amount, 0f, maxHealth);
     public void AddAmmo(int amount) => ammo = Mathf.Clamp(ammo + amount, 0, maxAmmo);
 }
